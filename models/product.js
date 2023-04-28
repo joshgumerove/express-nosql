@@ -9,36 +9,33 @@ class Product {
   }
 
   save() {
-    const db = getDb("products")
+    const db = getDb();
+    return db
+      .collection("products")
       .insertOne(this)
-      .then((result) => console.log("the document was save: ", result))
-      .catch((err) =>
-        console.log("there has been an error saving document: ", err)
-      );
-    // the collection we want to connect to
+      .then((result) => {
+        console.log("what is the result: ", result);
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  static fetchAll() {
+    const db = getDb();
+    return db
+      .collection("products")
+      .find()
+      .toArray()
+      .then((products) => {
+        console.log(products);
+        return products;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
-
-// const Product = sequelize.define("product", {
-//   id: {
-//     type: Sequelize.INTEGER,
-//     autoIncrement: true,
-//     allowNull: false,
-//     primaryKey: true,
-//   },
-//   title: Sequelize.STRING,
-//   price: {
-//     type: Sequelize.DOUBLE,
-//     allowNull: false,
-//   },
-//   imageUrl: {
-//     type: Sequelize.STRING,
-//     allowNull: false,
-//   },
-//   description: {
-//     type: Sequelize.STRING,
-//     allowNull: false,
-//   },
-// });
 
 module.exports = Product;
