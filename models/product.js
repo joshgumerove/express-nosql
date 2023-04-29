@@ -33,7 +33,7 @@ class Product {
         return products;
       })
       .catch((err) => {
-        console.log(err);
+        console.log("there is an error compass: ", err);
       });
   }
 }
