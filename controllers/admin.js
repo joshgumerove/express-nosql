@@ -87,13 +87,4 @@ exports.postDeleteProduct = (req, res, next) => {
     console.log("product successfully deleted");
     res.redirect("/admin/products");
   });
-  // Product.findById(prodId)
-  //   .then(product => {
-  //     return product.destroy();
-  //   })
-  //   .then(result => {
-  //     console.log('DESTROYED PRODUCT');
-  //     res.redirect('/admin/products');
-  //   })
-  //   .catch(err => console.log(err));
 };
