@@ -10,17 +10,6 @@ exports.getProducts = (req, res, next) => {
       });
     })
     .catch((err) => console.log("error rendering products: ", err));
-  // Product.fetchAll()
-  //   .then((products) => {
-  //     res.render("shop/product-list", {
-  //       prods: products,
-  //       pageTitle: "All Products",
-  //       path: "/products",
-  //     });
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
 };
 
 exports.getProduct = (req, res, next) => {
@@ -46,17 +35,6 @@ exports.getIndex = (req, res, next) => {
       });
     })
     .catch((err) => console.log("error fetching home page: ", err));
-  // Product.fetchAll()
-  //   .then((products) => {
-  //     res.render("shop/index", {
-  //       prods: products,
-  //       pageTitle: "Shop",
-  //       path: "/",
-  //     });
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
 };
 
 exports.getCart = (req, res, next) => {
