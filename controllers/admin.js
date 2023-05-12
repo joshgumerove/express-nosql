@@ -64,20 +64,6 @@ exports.postEditProduct = (req, res, next) => {
       res.redirect("/admin/products");
     })
     .catch((err) => console.log("error updating product: ", ifError));
-  // const product = new Product(
-  //   updatedTitle,
-  //   updatedPrice,
-  //   updatedDesc,
-  //   updatedImageUrl,
-  //   new ObjectId(prodId)
-  // );
-  // product
-  //   .save()
-  //   .then((result) => {
-  //     console.log("UPDATED PRODUCT!");
-  //     res.redirect("/admin/products");
-  //   })
-  //   .catch((err) => console.log(err));
 };
 
 exports.getProducts = (req, res, next) => {
@@ -94,8 +80,8 @@ exports.getProducts = (req, res, next) => {
 
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
-  Product.deleteById(new ObjectId(prodId)).then((result) => {
+  Product.deleteOne({ _id: prodId }).then((result) => {
     console.log("product successfully deleted");
-    sres.redirect("/admin/products");
+    res.redirect("/admin/products");
   });
 };
