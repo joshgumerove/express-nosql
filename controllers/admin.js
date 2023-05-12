@@ -66,7 +66,7 @@ exports.postEditProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll()
+  Product.find()
     .then((products) => {
       res.render("admin/products", {
         prods: products,
@@ -74,9 +74,7 @@ exports.getProducts = (req, res, next) => {
         path: "admin/products",
       });
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log("error fetching admin products: ", err));
 };
 
 exports.postDeleteProduct = (req, res, next) => {
