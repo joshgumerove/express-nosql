@@ -1,3 +1,4 @@
+const { ifError } = require("assert");
 const Product = require("../models/product");
 const mongodb = require("mongodb");
 
@@ -49,20 +50,34 @@ exports.postEditProduct = (req, res, next) => {
   const updatedPrice = req.body.price;
   const updatedImageUrl = req.body.imageUrl;
   const updatedDesc = req.body.description;
-  const product = new Product(
-    updatedTitle,
-    updatedPrice,
-    updatedDesc,
-    updatedImageUrl,
-    new ObjectId(prodId)
-  );
-  product
-    .save()
+
+  Product.updateOne(
+    { _id: prodId },
+    {
+      title: updatedTitle,
+      price: updatedPrice,
+      imageUrl: updatedImageUrl,
+      description: updatedDesc,
+    }
+  )
     .then((result) => {
-      console.log("UPDATED PRODUCT!");
       res.redirect("/admin/products");
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log("error updating product: ", ifError));
+  // const product = new Product(
+  //   updatedTitle,
+  //   updatedPrice,
+  //   updatedDesc,
+  //   updatedImageUrl,
+  //   new ObjectId(prodId)
+  // );
+  // product
+  //   .save()
+  //   .then((result) => {
+  //     console.log("UPDATED PRODUCT!");
+  //     res.redirect("/admin/products");
+  //   })
+  //   .catch((err) => console.log(err));
 };
 
 exports.getProducts = (req, res, next) => {
