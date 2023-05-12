@@ -13,7 +13,13 @@ exports.postAddProduct = (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
-  const product = new Product({ title, imageUrl, price, description });
+  const product = new Product({
+    title,
+    imageUrl,
+    price,
+    description,
+    userId: req.user, // mongoose will automatically store just ._id
+  });
 
   product
     .save()
