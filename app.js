@@ -34,4 +34,5 @@ app.use(errorController.get404);
 
 mongoConnect(() => {
   app.listen(3005);
+  console.log("listening on port 3005");
 });
