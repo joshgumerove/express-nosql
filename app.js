@@ -4,7 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const errorController = require("./controllers/error");
-const mongoConnect = require("./util/database").mongoConnect;
+const mongoose = require("mongoose");
 const User = require("./models/user");
 
 const app = express();
@@ -32,7 +32,43 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
-mongoConnect(() => {
-  app.listen(3005);
-  console.log("listening on port 3005");
-});
+mongoose
+  .connect(
+    "mongodb+srv://jgumerove1:pizzapizza@cluster0.t0lxwuo.mongodb.net/shop?retryWrites=true&w=majority"
+  )
+  .then((result) => {
+    app.listen(3005);
+    console.log("listening on port 3005");
+  })
+  .catch((err) => console.log("error connecting to mongoose: ", err));
+
+// const mongodb = require("mongodb");
+// const MongoClient = mongodb.MongoClient;
+
+// let _db;
+
+// const mongoConnect = (callback) => {
+//   MongoClient.connect(
+//     "mongodb+srv://jgumerove1:pizzapizza@cluster0.t0lxwuo.mongodb.net/shop?retryWrites=true&w=majority"
+//   )
+
+//     .then((client) => {
+//       console.log("Connected!");
+//       _db = client.db();
+//       callback();
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       throw err;
+//     });
+// };
+
+// const getDb = () => {
+//   if (_db) {
+//     return _db;
+//   }
+//   throw "No database found!";
+// };
+
+// exports.mongoConnect = mongoConnect;
+// exports.getDb = getDb;

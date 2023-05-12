@@ -1,4 +1,3 @@
-const getDb = require("../util/database").getDb;
 const mongodb = require("mongodb");
 
 class Product {
