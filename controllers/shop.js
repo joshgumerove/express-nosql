@@ -90,17 +90,28 @@ exports.postOrder = (req, res, next) => {
       });
       return order.save();
     })
-    .then((result) => res.redirect("/orders"));
+    .then((result) => {
+      req.user.clearCart();
+      res.redirect("/orders");
+    });
 
   // req.user.addOrder().then(() => res.redirect("/orders"));
 };
 
 exports.getOrders = (req, res, next) => {
-  req.user.getOrders().then((orders) => {
+  Order.find({ "user.userId": req.user._id }).then((orders) => {
+    console.log("what are orders: ", orders);
     res.render("shop/orders", {
       path: "/orders",
       pageTitle: "Your Orders",
       orders: orders,
     });
   });
+  // req.user.getOrders().then((orders) => {
+  //   res.render("shop/orders", {
+  //     path: "/orders",
+  //     pageTitle: "Your Orders",
+  //     orders: orders,
+  //   });
+  // });
 };
