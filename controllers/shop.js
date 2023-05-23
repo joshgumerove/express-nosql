@@ -94,8 +94,6 @@ exports.postOrder = (req, res, next) => {
       req.user.clearCart();
       res.redirect("/orders");
     });
-
-  // req.user.addOrder().then(() => res.redirect("/orders"));
 };
 
 exports.getOrders = (req, res, next) => {
@@ -107,11 +105,4 @@ exports.getOrders = (req, res, next) => {
       orders: orders,
     });
   });
-  // req.user.getOrders().then((orders) => {
-  //   res.render("shop/orders", {
-  //     path: "/orders",
-  //     pageTitle: "Your Orders",
-  //     orders: orders,
-  //   });
-  // });
 };
