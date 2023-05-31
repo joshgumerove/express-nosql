@@ -1,5 +1,5 @@
 exports.getLogin = (req, res, next) => {
-  const isLoggedIn = req.get("Cookie").split(";")[3].trim().split("=")[1];
+  const isLoggedIn = req.get("Cookie");
 
   res.render("auth/login", {
     path: "/login",
@@ -9,7 +9,7 @@ exports.getLogin = (req, res, next) => {
 };
 
 exports.postLogin = (req, res, next) => {
-  res.setHeader("Set-Cookie", "loggedIn=true"); // NOTE: the name 'Set-Cookie' is a reserved header value
+  res.setHeader("Set-Cookie", "loggedIn=true; HttpOnly"); // NOTE: the name 'Set-Cookie' is a reserved header value
   // NOTE: loggedIn=true creates key of loggedIn and value of true
   // can see in Application/storage/cookies
   res.redirect("/");
