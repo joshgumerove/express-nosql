@@ -1,10 +1,10 @@
 exports.getLogin = (req, res, next) => {
-  const isLoggedIn = req.get("Cookie");
+  // const isLoggedIn = req.get("Cookie");
 
   res.render("auth/login", {
     path: "/login",
     pageTitle: "Login",
-    isAuthenticated: isLoggedIn,
+    isAuthenticated: false,
   });
 };
 
