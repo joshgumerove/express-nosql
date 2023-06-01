@@ -6,9 +6,18 @@ const bodyParser = require("body-parser");
 const errorController = require("./controllers/error");
 const mongoose = require("mongoose");
 const session = require("express-session");
+const MongoDBStore = require("connect-mongodb-session")(session);
 const User = require("./models/user");
 
+const MONGODB_URI =
+  "mongodb+srv://jgumerove1:pizzapizza@cluster0.t0lxwuo.mongodb.net/shop?retryWrites=true&w=majority";
+
 const app = express();
+
+const store = new MongoDBStore({
+  uri: MONGODB_URI,
+  collection: "sessions",
+});
 
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -24,6 +33,7 @@ app.use(
     secret: "my secret", //should be long string in production
     resave: false, // improves performance
     saveUninitialized: false,
+    store: store,
   })
 );
 
@@ -43,9 +53,7 @@ app.use(authRoutes);
 app.use(errorController.get404);
 
 mongoose
-  .connect(
-    "mongodb+srv://jgumerove1:pizzapizza@cluster0.t0lxwuo.mongodb.net/shop?retryWrites=true&w=majority"
-  )
+  .connect(MONGODB_URI)
   .then((result) => {
     app.listen(3005);
     console.log("listening on port 3005");
