@@ -19,3 +19,12 @@ exports.postLogin = (req, res, next) => {
       console.log("there has been an error setting session: ", err)
     );
 };
+
+exports.postLogout = (req, res, next) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log("error clearing session: ", err);
+    }
+    res.redirect("/");
+  });
+};
