@@ -19,7 +19,7 @@ exports.postAddProduct = (req, res, next) => {
     imageUrl,
     price,
     description,
-    userId: req.session.user, // mongoose will automatically store just ._id
+    userId: req.user, // mongoose will automatically store just ._id
   });
 
   product
