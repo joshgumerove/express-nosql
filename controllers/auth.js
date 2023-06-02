@@ -13,7 +13,12 @@ exports.postLogin = (req, res, next) => {
     .then((user) => {
       req.session.isLoggedIn = true;
       req.session.user = user;
-      res.redirect("/");
+      req.session.save((err) => {
+        if (err) {
+          console.log("there has been an error saving the session: ", err);
+        }
+        res.redirect("/");
+      });
     })
     .catch((err) =>
       console.log("there has been an error setting session: ", err)
