@@ -61,9 +61,6 @@ exports.postCart = (req, res, next) => {
     .then((product) => {
       return req.user.addToCart(product);
     })
-    .then((result) => {
-      console.log("this is the result of addToCart: ", result);
-    })
     .then(() => res.redirect("/cart"));
 };
 
@@ -86,7 +83,7 @@ exports.postOrder = (req, res, next) => {
       });
       const order = new Order({
         user: {
-          name: req.session.user.name,
+          name: req.session.user.email,
           userId: req.session.user,
         },
         products: products,
