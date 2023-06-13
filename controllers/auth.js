@@ -1,5 +1,17 @@
-const User = require("../models/user");
 const bcrypt = require("bcryptjs");
+const nodeMailer = require("nodemailer");
+const sendgridTransport = require("nodemailer-sendgrid-transport");
+const config = require("../config");
+
+const User = require("../models/user");
+
+const transporter = nodeMailer.createTransport(
+  sendgridTransport({
+    auth: {
+      api_key: config.API_KEY,
+    },
+  })
+);
 
 exports.getLogin = (req, res, next) => {
   let message = req.flash("error");
