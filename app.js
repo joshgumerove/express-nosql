@@ -9,11 +9,8 @@ const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const csrf = require("csurf");
 const flash = require("connect-flash");
-const config = require("./config");
 
 const User = require("./models/user");
-
-console.log("what is config", config);
 
 const MONGODB_URI =
   "mongodb+srv://jgumerove1:pizzapizza@cluster0.t0lxwuo.mongodb.net/shop?retryWrites=true&w=majority";

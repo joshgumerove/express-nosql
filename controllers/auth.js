@@ -70,6 +70,12 @@ exports.postSignup = (req, res, next) => {
     })
     .then((result) => {
       res.redirect("/login");
+      return transporter.sendMail({
+        to: email,
+        from: "jgumerove1@gmail.com",
+        subject: "Signup",
+        html: "<h1>Successfully receiving email</h1>",
+      });
     })
     .catch((err) => console.log("error with signup: ", err));
 };
