@@ -53,7 +53,7 @@ exports.postEditProduct = (req, res, next) => {
   const updatedDesc = req.body.description;
 
   Product.updateOne(
-    { _id: prodId },
+    { _id: prodId, userId: req.user._id },
     {
       title: updatedTitle,
       price: updatedPrice,
@@ -81,7 +81,7 @@ exports.getProducts = (req, res, next) => {
 
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
-  Product.deleteOne({ _id: prodId }).then((result) => {
+  Product.deleteOne({ _id: prodId, userId: req.user._id }).then((result) => {
     console.log("product successfully deleted");
     res.redirect("/admin/products");
   });
